@@ -16,7 +16,7 @@ Open Y 2.5+
 You can install this module with help of composer. Please, use this command:
 
 `composer config minimum-stability dev`
-`composer require openy/openy_memberships`
+`composer require ycloudyusa/yusaopeny_memberships`
 
 We strongly recomment to use composer, because OpenY Membership project requires a lot of dependencies.
 
@@ -30,7 +30,7 @@ You need to build styles using this commands
 
 ## Upgrade to 2.4 version
 
-Release 2.3 (https://github.com/ymcatwincities/openy_memberships/releases/tag/2.3) is needed as an intermediate state for the upgrade path.
+Release 2.3 (https://github.com/ycloudyusa/yusaopeny_memberships/releases/tag/2.3) is needed as an intermediate state for the upgrade path.
 In order to uninstall swiftmailer - upgrade to the 2.3 release and uninstall the module from your Drupal.
 Once uninstalled - proceed with upgrading to the 2.4 version of Open Y Memberships
 
@@ -39,7 +39,7 @@ Once uninstalled - proceed with upgrading to the 2.4 version of Open Y Membershi
 To install the demo content, please do next steps:
 1. Enable an additional module:
 `drush en openy_memberships_demo_content -y`
-2. [Run demo content migrations from the module description](https://github.com/ymcatwincities/openy_memberships/tree/master/modules/openy_memberships_demo_content)
+2. [Run demo content migrations from the module description](https://github.com/ycloudyusa/yusaopeny_memberships/tree/master/modules/openy_memberships_demo_content)
 
 
 Steps for installation - CI sources https://github.com/ymcatwincities/openy-cibox-build/blob/master/devops/reinstall/vars/environments/membership_framework_env.yml
@@ -65,7 +65,7 @@ Steps for installation - CI sources https://github.com/ymcatwincities/openy-cibo
 In the initial build of the Memberships framework we had a robust Addons/Discounts functionality. Application had a separate step for that feature.
 Since that step was very complex for many organisations, dev team hided it from the application.
 
-To have Discount Finder step included in Membership builder, please revert code from this pr https://github.com/ymcatwincities/openy_memberships/pull/60 
+To have Discount Finder step included in Membership builder, please revert code from this pr https://github.com/ycloudyusa/yusaopeny_memberships/pull/60 
 And add DiscountFinder step here /admin/openy/memberships/settings (after "Results" step)
 
 ## Documentation
@@ -74,4 +74,4 @@ And add DiscountFinder step here /admin/openy/memberships/settings (after "Resul
 
 For site admins and content managers to configure and update their online membership experience.
 
-https://github.com/ymcatwincities/openy_memberships/wiki
+https://github.com/ycloudyusa/yusaopeny_memberships/wiki
