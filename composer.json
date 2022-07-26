@@ -1,14 +1,14 @@
 {
-    "name": "ycloudusa/yusaopeny_memberships",
+    "name": "ycloudyusa/yusaopeny_memberships",
     "type": "drupal-module",
     "description": "Implement Membership Framework for YUSA OpenY and Drupal community",
     "keywords": [
     ],
-    "homepage": "https://github.com/ycloudusa/yusaopeny_memberships",
+    "homepage": "https://github.com/ycloudyusa/yusaopeny_memberships",
     "minimum-stability": "dev",
     "support": {
-        "issues": "https://github.com/ycloudusa/yusaopeny_memberships/issues",
-        "source": "https://github.com/ycloudusa/yusaopeny_memberships.git"
+        "issues": "https://github.com/ycloudyusa/yusaopeny_memberships/issues",
+        "source": "https://github.com/ycloudyusa/yusaopeny_memberships.git"
     },
     "repositories": {
         "drupal": {
