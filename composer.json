@@ -22,7 +22,7 @@
         "openy/commerce_addon": "dev-8.x-1.x",
         "openy/openy_prgf_sidebar_menu": "9.x-dev",
         "openy/openy_block_modal": "^1.0",
-        "drupal/paragraph_skins": "^2.0",
+        "drupal/paragraph_skins": "^2.0 || ^3.0",
         "openy/commerce_cart_api": "dev-8.x-1.x",
         "drupal/symfony_mailer": "^1.0@alpha || ^1.0",
         "drupal/webform": "^6.1",
