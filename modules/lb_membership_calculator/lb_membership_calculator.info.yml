@@ -1,0 +1,10 @@
+name: 'LB Membership Calculator'
+type: module
+description: 'Helper module to show "Membership Calculator" block in Layout Builder.'
+core_version_requirement: ^8.8 || ^9 || ^10
+dependencies:
+  - block_content
+  - layout_builder
+  - y_lb
+  - openy_memberships
+version: 1.0.0
