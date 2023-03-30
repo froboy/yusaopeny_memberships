@@ -16,7 +16,7 @@ field_name: field_block
 entity_type: block_content
 bundle: lb_membership_calculator
 label: Block
-description: ''
+description: 'A reference to the Memberships Block'
 required: false
 translatable: true
 default_value:
