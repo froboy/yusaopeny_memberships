@@ -2,9 +2,9 @@ langcode: en
 status: true
 dependencies:
   config:
-    - block_content.type.lb_membership_calculator
-id: block_content.lb_membership_calculator
+    - block_content.type.lb_membership_framework
+id: block_content.lb_membership_framework
 target_entity_type_id: block_content
-target_bundle: lb_membership_calculator
+target_bundle: lb_membership_framework
 default_langcode: site_default
 language_alterable: false

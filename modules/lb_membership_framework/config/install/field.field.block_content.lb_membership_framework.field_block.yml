@@ -2,7 +2,7 @@ langcode: en
 status: true
 dependencies:
   config:
-    - block_content.type.lb_membership_calculator
+    - block_content.type.lb_membership_framework
     - field.storage.block_content.field_block
   module:
     - datalayer
@@ -11,12 +11,12 @@ third_party_settings:
   datalayer:
     expose: 0
     label: field_block
-id: block_content.lb_membership_calculator.field_block
+id: block_content.lb_membership_framework.field_block
 field_name: field_block
 entity_type: block_content
-bundle: lb_membership_calculator
+bundle: lb_membership_framework
 label: Block
-description: 'A reference to the Memberships Block'
+description: 'A reference to the Memberships Framework Block'
 required: false
 translatable: true
 default_value:
@@ -24,7 +24,7 @@ default_value:
     plugin_id: memberships_block
     plugin_configuration:
       id: memberships_block
-      label: 'Membership Calculator'
+      label: 'Membership Framework'
       label_display: '0'
       provider: openy_memberships_front
     plugin_configuration_schema_id: block.settings.memberships_block

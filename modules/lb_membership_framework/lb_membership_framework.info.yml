@@ -1,0 +1,10 @@
+name: 'LB Membership Framework'
+type: module
+description: 'Helper module to show "Membership Framework" block in Layout Builder.'
+core_version_requirement: ^8.8 || ^9 || ^10
+dependencies:
+  - drupal:block_content
+  - drupal:layout_builder
+  - y_lb
+  - openy_memberships
+version: 1.0.0
