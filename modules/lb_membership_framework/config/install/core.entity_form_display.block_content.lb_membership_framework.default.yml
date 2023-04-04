@@ -2,13 +2,13 @@ langcode: en
 status: true
 dependencies:
   config:
-    - block_content.type.lb_membership_calculator
-    - field.field.block_content.lb_membership_calculator.field_block
+    - block_content.type.lb_membership_framework
+    - field.field.block_content.lb_membership_framework.field_block
   module:
     - plugin
-id: block_content.lb_membership_calculator.default
+id: block_content.lb_membership_framework.default
 targetEntityType: block_content
-bundle: lb_membership_calculator
+bundle: lb_membership_framework
 mode: default
 content:
   field_block:

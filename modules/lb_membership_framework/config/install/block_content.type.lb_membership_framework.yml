@@ -1,0 +1,7 @@
+langcode: en
+status: true
+dependencies: {  }
+id: lb_membership_framework
+label: 'Membership Framework'
+revision: 0
+description: 'A component to add Membership Framework block to Layout Builder.'
