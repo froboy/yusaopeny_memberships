@@ -26,7 +26,7 @@ function lb_membership_framework_preprocess_block__lb_membership_framework(&$var
   // We need this library to display the Membership Builder block.
   $variables['#attached']['library'][] = 'openy_memberships/memberships-app';
   if ($variables['in_preview']) {
-    $variables['in_preview_placeholder'] = t('Memberships Calculator: To see your changes in this block, please save the layout.');
+    $variables['in_preview_placeholder'] = t('Membership Framework: To see your changes in this block, please save the layout.');
   }
 }
 
