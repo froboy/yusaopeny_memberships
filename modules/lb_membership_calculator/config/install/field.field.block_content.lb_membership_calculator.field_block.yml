@@ -1,0 +1,28 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.lb_membership_calculator
+    - field.storage.block_content.field_block
+  module:
+    - plugin
+id: block_content.lb_membership_calculator.field_block
+field_name: field_block
+entity_type: block_content
+bundle: lb_membership_calculator
+label: Block
+description: 'A reference to the Memberships Calculator Block'
+required: true
+translatable: true
+default_value:
+  -
+    plugin_id: calc_block
+    plugin_configuration:
+      id: calc_block
+      label: 'Membership Calculator Block'
+      label_display: '0'
+      provider: openy_calc
+    plugin_configuration_schema_id: block.settings.calc_block
+default_value_callback: ''
+settings: {  }
+field_type: 'plugin:block'
