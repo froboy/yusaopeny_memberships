@@ -1,0 +1,7 @@
+langcode: en
+status: true
+dependencies: {  }
+id: lb_membership_calculator
+label: 'Membership Calculator'
+revision: 0
+description: 'A component to add a Membership Calculator block to Layout Builder.'

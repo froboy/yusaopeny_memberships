@@ -1,0 +1,92 @@
+<?php
+
+/**
+ * @file
+ * Contains lb_membership_calculator module hooks.
+ */
+
+use Drupal\Core\Form\FormStateInterface;
+
+/**
+ * Implements hook_theme().
+ */
+function lb_membership_calculator_theme() {
+  return [
+    'block__lb_membership_calculator' => [
+      'base hook' => 'block',
+      'template' => 'block--lb-membership-calculator',
+    ]
+  ];
+}
+
+/**
+ * Implements hook_preprocess_HOOK().
+ */
+function lb_membership_calculator_preprocess_block__lb_membership_calculator(&$variables) {
+  if ($variables['in_preview']) {
+    $variables['in_preview_placeholder'] = t('Membership Calculator: To see your changes in this block, please save the layout.');
+  }
+}
+
+/**
+ * Implements hook_form_alter().
+ */
+function lb_membership_calculator_form_alter(&$form, FormStateInterface $form_state) {
+  // Block configuration form.
+  if (in_array($form['#form_id'],
+    [
+      'layout_builder_add_block',
+      'layout_builder_update_block',
+    ]
+  )) {
+    /** @var \Drupal\layout_builder\Form\ConfigureBlockFormBase $form_object */
+    $form_object = $form_state->getFormObject();
+    $component = $form_object->getCurrentComponent();
+    $plugin = $component->getPlugin();
+    $block_id = $plugin->getDerivativeId() ?? $plugin->getBaseId();
+
+    if ($block_id === 'lb_membership_calculator') {
+      if (isset($form['settings']['block_form'])) {
+        $form['settings']['block_form']['#process'][] = '_lb_membership_calculator_inline_block_filed_process';
+      }
+    }
+  }
+}
+
+/**
+ * Custom process callback for inline block elements.
+ *
+ * @param array $element
+ *   Element to process.
+ * @param \Drupal\Core\Form\FormStateInterface $form_state
+ *   The form state.
+ *
+ * @return array
+ *   Processed element.
+ */
+function _lb_membership_calculator_inline_block_filed_process(array $element, FormStateInterface $form_state) {
+  if (isset($element['field_block'])) {
+    $element['field_block']['widget']['#after_build'][] = '_lb_membership_calculator_after_build_callback';
+  }
+  return $element;
+}
+
+/**
+ * Custom '#after_build' callback for field_block.
+ *
+ * @param array $element
+ *   Element to process.
+ * @param \Drupal\Core\Form\FormStateInterface $form_state
+ *   The form state.
+ *
+ * @return array
+ *   Processed element.
+ */
+function _lb_membership_calculator_after_build_callback($element, FormStateInterface $form_state) {
+  if (isset($element[0]['plugin_selector']['container'])) {
+    // Hide the select block field and the custom block's title field.
+    $element[0]['plugin_selector']['container']['select']['container']['#attributes']['class'][] = 'hidden';
+    $element[0]['plugin_selector']['container']['plugin_form']['#attributes']['class'][] = 'hidden';
+  }
+  return $element;
+}
