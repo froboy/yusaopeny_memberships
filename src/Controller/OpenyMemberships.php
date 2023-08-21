@@ -419,7 +419,7 @@ class OpenyMemberships extends ControllerBase {
     $settings = [
       'body' => [
         '#content' => [
-          'logo_url' => drupal_get_path('module', 'openy_repeat') . '/img/ymca_logo_black.png',
+          'logo_url' => \Drupal::service('extension.list.module')->getPath('module', 'openy_repeat') . '/img/ymca_logo_black.png',
           'site_name' => $this->siteConfig->get('name'),
           'result' => $this->getSummaryData($order_uuid),
         ],
@@ -576,7 +576,7 @@ class OpenyMemberships extends ControllerBase {
 
     $body = [
       '#content' => [
-        'logo_url' => Url::fromUri('internal:/' . drupal_get_path('module', 'openy_repeat') . '/img/ymca_logo_black.png', ['absolute' => TRUE]),
+        'logo_url' => Url::fromUri('internal:/' . \Drupal::service('extension.list.module')->getPath('module', 'openy_repeat') . '/img/ymca_logo_black.png', ['absolute' => TRUE]),
         'site_name' => $this->siteConfig->get('name'),
         'result' => $this->getSummaryData($order_uuid),
       ],
