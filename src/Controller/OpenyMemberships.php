@@ -134,6 +134,7 @@ class OpenyMemberships extends ControllerBase {
       ->getQuery()
       ->condition('vid', 'memberships_ages_groups')
       ->condition('status', 1)
+      ->accessCheck(TRUE)
       ->sort('weight', 'ASC')
       ->execute();
     $terms = Term::loadMultiple($tids);
