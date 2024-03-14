@@ -284,6 +284,7 @@ class OpenyMemberships extends ControllerBase {
     $agesGroupType = count($agesGroups) == 1 ? 'individual' : 'family';
     $storage = $this->entityTypeManager->getStorage('commerce_product');
     $query = $storage->getQuery();
+    $query->accessCheck();
     if (!empty($agesGroups)) {
       // Filter products by provided Ages Groups.
       $query->condition('field_om_total_available.target_id', array_keys($agesGroups), 'IN');
