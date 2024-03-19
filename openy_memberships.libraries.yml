@@ -89,12 +89,16 @@ free-trial:
       css/paragraph_skins/free-trial.css: {}
 
 accordion:
-  version: 1.x
+  version: 1.1
   css:
     theme:
       css/paragraph_skins/accordion.css: {}
   js:
     js/accordion.behaviors.js: {}
+  dependencies:
+    - core/drupal
+    - core/jquery
+    - core/once
 
 membership_types_listing:
   version: 1.x
