@@ -26,7 +26,6 @@ use Drupal\Core\Url;
  */
 class OpenyMemberships extends ControllerBase {
 
-
   /**
    * The entityTypeManager.
    *
@@ -476,7 +475,7 @@ class OpenyMemberships extends ControllerBase {
               'currency' => $order_item->getTotalPrice()->getCurrencyCode(),
               'field_best_value' => $purchasedEntity->field_best_value->value,
               'product_title' => $product->getTitle(),
-              'product_description' => render($product_description),
+              'product_description' => $this->renderer->render($product_description),
               'product_branch' => $product_branch,
             ];
           }
