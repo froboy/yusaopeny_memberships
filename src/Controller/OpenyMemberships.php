@@ -340,16 +340,24 @@ class OpenyMemberships extends ControllerBase {
           }
         }
         if (!$filter_product) {
+          $branch_array = NULL;
+          $branch_nodes = $product->field_product_branch->referencedEntities();
+          foreach ($branch_nodes as $branch_node) {
+            if($branch_node->id() !== $branch) {
+              continue;
+            }
+            $branch_array = [
+              'uuid' => $branch_node->uuid(),
+              'id' => $branch_node->id(),
+              'title' => $branch_node->label(),
+            ];
+          }
           $products[$product->uuid()] = [
             'uuid' => $product->uuid(),
             'id' => $product->id(),
             'title' => $product->label(),
             'field_description' => $product->field_description->value,
-            'branch' => $product->field_product_branch && $product->field_product_branch->entity ? [
-              'uuid' => $product->field_product_branch->entity->uuid(),
-              'id' => $product->field_product_branch->entity->id(),
-              'title' => $product->field_product_branch->entity->label(),
-            ] : NULL,
+            'branch' => $branch_array,
             'variations' => [],
           ];
           foreach ($product->variations as $variant) {
