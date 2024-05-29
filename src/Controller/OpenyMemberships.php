@@ -343,14 +343,14 @@ class OpenyMemberships extends ControllerBase {
           $branch_array = NULL;
           $branch_nodes = $product->field_product_branch->referencedEntities();
           foreach ($branch_nodes as $branch_node) {
-            if($branch_node->id() !== $branch) {
-              continue;
+            if ($branch_node->id() === $branch) {
+              $branch_array = [
+                'uuid' => $branch_node->uuid(),
+                'id' => $branch_node->id(),
+                'title' => $branch_node->label(),
+              ];
+              break;
             }
-            $branch_array = [
-              'uuid' => $branch_node->uuid(),
-              'id' => $branch_node->id(),
-              'title' => $branch_node->label(),
-            ];
           }
           $products[$product->uuid()] = [
             'uuid' => $product->uuid(),
