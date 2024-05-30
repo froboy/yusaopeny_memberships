@@ -65,7 +65,7 @@ function openy_memberships_update_8001() {
 function openy_memberships_update_8002() {
   $config_factory = \Drupal::configFactory();
   $config = $config_factory->getEditable('openy_memberships_front.settings');
-  $config->set("steps", "BranchSelectorHome\r\nFamily\r\nResults\r\nDiscountFinder\r\nSummary\r\nJoinNow\r\nSuccess")
+  $config->set("steps", "BranchSelectorHome\r\nFamily\r\nResults\r\nSummary\r\nJoinNow\r\nSuccess")
     ->save();
   $config_importer = \Drupal::service('config_import.importer');
   $config_importer->setDirectory(\Drupal::service('extension.list.module')->getPath('module', 'openy_memberships') . '/config/install');
