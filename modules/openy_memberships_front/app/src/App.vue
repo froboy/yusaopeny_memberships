@@ -1,7 +1,6 @@
 <template>
   <div id="app" :class="'membership-app ' + $router.currentRoute.name">
-    <router-view @go-next="goNext" />
-
+    <router-view @go-next="goNext" @go-prev="goPrev" />
   </div>
 </template>
 
@@ -16,6 +15,7 @@ export default {
     }
   },
   mounted() {
+    this.$store.commit('setStep', 1);
     let stepsConfig = window.drupalSettings.openy_memberships_front && window.drupalSettings.openy_memberships_front.steps ? window.drupalSettings.openy_memberships_front.steps : null;
     if (stepsConfig) {
       this.$store.commit('setSteps', stepsConfig);
@@ -23,7 +23,7 @@ export default {
     let step = this.$store.state.step;
     let steps = this.$store.state.steps;
     if (steps[step] && this.$route.name != steps[step]) {
-      //this.$router.replace({ name:  steps[step] })
+      this.$router.replace({ name:  steps[step] })
     }
     if (!this.$route.name) {
       this.$router.replace({ name:  steps[0] })
@@ -46,6 +46,33 @@ export default {
       if(currentStep !== -1 && currentStep + 1 < this.$store.state.steps.length) {
         this.$store.commit('setStep', currentStep + 1)
       }
+      if (currentStep + 1 === this.$store.state.step) {
+        this.navigateToPage();
+      }
+    },
+    goPrev() {
+      let currentStep = this.$store.state.steps.indexOf(this.$route.name);
+      if(currentStep !== -1 && currentStep - 1 < this.$store.state.steps.length) {
+        this.$store.commit('setStep', currentStep -1);
+      }
+      if (currentStep - 1 === this.$store.state.step) {
+        this.navigateToPage();
+      }
+    },
+    navigateToPage() {
+      let header = window.document.querySelector('.main-header .top-navs');
+      let block = window.document.getElementsByClassName('paragraph--type--memberships');
+
+      if (header && block) {
+        let topOffset = window.scrollY + block[0].getBoundingClientRect().top - header.offsetHeight - header.getBoundingClientRect().top - 100;
+        window.scrollTo(0, topOffset);
+      }
+
+      let step = this.$store.state.step;
+      let steps = this.$store.state.steps;
+      if (steps[step] && this.$route.name != steps[step]) {
+        this.$router.push({ name:  steps[step] })
+      }
     }
   },
   watch: {
@@ -55,19 +82,15 @@ export default {
       let currentStep = this.$store.state.steps.indexOf(to.name);
       // Check if user has selected Home Branch, and avoid redirect to BranchSelector.
       if (VueCookies.get('home_branch') !== null && this.$store.state.location && to.name == 'BranchSelectorHome') {
-        this.$store.commit('setStep', 1);
-        this.$router.push({ name:  steps[1] });
+        this.$store.commit('setStep', step);
+        this.$router.push({ name:  steps[step] });
       }
       else if (currentStep != -1 && step != currentStep) {
         this.$store.commit('setStep', currentStep)
       }
     },
     step() {
-      let step = this.$store.state.step;
-      let steps = this.$store.state.steps;
-      if (steps[step] && this.$route.name != steps[step]) {
-        this.$router.push({ name:  steps[step] })
-      }
+      this.navigateToPage();
     }
   }
 };

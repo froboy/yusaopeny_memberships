@@ -8,6 +8,7 @@ export default {
       location: null,
       family: {},
       familyTotalCount: 0,
+      selectedPackageUrl: false,
       product: null,
       keepCart: true,
       members: [],

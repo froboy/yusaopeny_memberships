@@ -251,10 +251,10 @@ class Cart {
         data: {}
       })
   }
-  getAgeGroups = () => {
+  getAgeGroups = (branch) => {
     return window.jQuery
       .ajax({
-        url: "/memberships/get/ages/groups",
+        url: "/memberships/get/ages/groups/" + branch,
         dataType: "json",
         data: {}
       })

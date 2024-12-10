@@ -6,7 +6,7 @@ openy_memberships.openy_memberships:
   requirements:
     _permission: 'access administration pages'
 openy_memberships.getAgesGroupsInfo:
-  path: /memberships/get/ages/groups
+  path: /memberships/get/ages/groups/{branch}
   defaults:
     _controller: '\Drupal\openy_memberships\Controller\OpenyMemberships::getAgesGroupsInfo'
   requirements:

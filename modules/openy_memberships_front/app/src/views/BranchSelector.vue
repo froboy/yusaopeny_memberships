@@ -5,10 +5,10 @@
     </h1>
     <div class="description">
       <div class="description-text">
-        Select your preferred YMCA branch.
+        Select your YMCA branch
       </div>
       <div class="text-align-right">
-        <a class="view-loactions" href="/locations">View Locations <ViewLocationIcon /></a>
+        <a class="view-loactions" href="/locations">View map of locations <ViewLocationIcon /></a>
       </div>
     </div>
 
@@ -19,7 +19,11 @@
     </div>
     <div class="navigation" v-if="$store.state.location">
       <div class="container">
-        <button class="btn btn-next" @click="$emit('go-next')">Next</button>
+        <div class="row align-items-center">
+          <div class="col-auto ml-auto">
+            <button class="btn btn-next" @click="$emit('go-next')">NEXT STEP</button>
+          </div>
+        </div>
       </div>
     </div>
   </section>
@@ -55,10 +59,14 @@ export default {
         let attributes = data.data[key].attributes;
         return {
           name: attributes.title,
-          address: attributes.field_location_address.locality + ', ' + attributes.field_location_address.administrative_area,
+          address: attributes.field_location_address.address_line1 + '. ' + attributes.field_location_address.locality + ', ' + attributes.field_location_address.administrative_area,
           value: attributes.drupal_internal__nid
         }
-      })
+      });
+
+      this.locations.sort(function(a, b) {
+        return a.name.toLowerCase().localeCompare(b.name.toLowerCase());
+      });
     }).catch(() => {
       this.isLoading = false
     })
