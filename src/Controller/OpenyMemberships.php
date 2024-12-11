@@ -362,7 +362,10 @@ class OpenyMemberships extends ControllerBase {
             'uuid' => $product->uuid(),
             'id' => $product->id(),
             'title' => $product->label(),
-            'field_description' => strip_tags($product->field_description->value, '<strong>'),
+            'field_description' => strip_tags(
+              !$product->field_description->isEmpty() ?
+                $product->field_description->value : '',
+              '<strong>'),
             'branch' => $branch_array,
             'variations' => [],
           ];
@@ -371,7 +374,9 @@ class OpenyMemberships extends ControllerBase {
               'uuid' => $variant->uuid(),
               'id' => $variant->id(),
               'price' => $variant->getPrice()->toArray()['number'],
-              'duration' => strip_tags($variant->field_description->value),
+              'duration' => strip_tags(
+                !$variant->field_description->isEmpty() ?
+                  $variant->field_description->value : ''),
               'field_best_value' => $variant->field_best_value->value,
               'title' => $variant->label(),
               'activenetUrl' => $variant->field_daxko_link->uri,
