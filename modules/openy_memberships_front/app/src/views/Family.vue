@@ -12,6 +12,11 @@
       <div class="d-block d-lg-none">
         <a class="view-loactions" href="/membership-qa">View member benefits<ViewLocationIcon name="ViewBenefits" /></a>
       </div>
+
+      <div class="mt-2 back-to-start alert alert-warning" v-if="!$store.state.location">
+        <p class="description-text">There seems to be a problem.</p>
+        <button class="btn btn-prev btn-outline-info" @click="$emit('go-home')">Please try again</button>
+      </div>
     </div>
 
     <div class="family-wrapper">
@@ -119,7 +124,8 @@ export default {
       let memberships = window.localStorage.getItem('memberships');
       memberships = JSON.parse(memberships);
       if (memberships['location'] === null) {
-        this.$router.push({name: 'BranchSelectorHome'})
+        // This doesn't work. I still don't know why.
+        this.$router.push({ name: 'BranchSelectorHome' });
       }
       return memberships['location'];
     }

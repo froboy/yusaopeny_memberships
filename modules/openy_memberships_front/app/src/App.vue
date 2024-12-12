@@ -1,6 +1,6 @@
 <template>
   <div id="app" :class="'membership-app ' + $router.currentRoute.name">
-    <router-view @go-next="goNext" @go-prev="goPrev" />
+    <router-view @go-next="goNext" @go-prev="goPrev" @go-home="goHome" />
   </div>
 </template>
 
@@ -58,6 +58,10 @@ export default {
       if (currentStep - 1 === this.$store.state.step) {
         this.navigateToPage();
       }
+    },
+    goHome() {
+      this.$store.commit('setStep', 0);
+      this.navigateToPage();
     },
     navigateToPage() {
       let header = window.document.querySelector('.main-header .top-navs');
