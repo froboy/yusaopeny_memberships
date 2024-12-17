@@ -19,8 +19,8 @@
       <loading :active.sync="isLoading"></loading>
       <products @go-next="$emit('go-next')" v-if="products.length" :products="products"/>
       <div class="no-result" v-if="!products.length">
-        No suitable products were found.
-        <button class="btn btn-prev" @click="$emit('go-home')">Please try again</button>
+        <p>No suitable products were found.</p>
+        <button class="btn btn-prev btn-outline-info" @click="$emit('go-home')">Please try again</button>
       </div>
     </div>
 
