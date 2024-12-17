@@ -99,3 +99,10 @@ export default {
   }
 };
 </script>
+
+<!-- Make sure app.css gets generated. -->
+<style>
+.membership-app {
+  display: inherit;
+}
+</style>
