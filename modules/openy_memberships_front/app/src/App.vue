@@ -32,7 +32,7 @@ export default {
     }
     // Check if user has selected Home Branch and set location.
     if (this.$cookies.get('home_branch').id !== null) {
-      this.$store.commit('setLocation', this.$cookies.get('home_branch').id.id);
+      this.$store.commit('setLocation', this.$cookies.get('home_branch').id);
       // Move to next step if we still on initial step.
       if (step == 0 && this.$cookies.get('home_branch').id !== null) {
         this.$store.commit('setStep', 1);
