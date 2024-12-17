@@ -90,7 +90,7 @@ export default {
   },
   computed: {
     descriptionText() {
-      return this.selectedBranch.name === 'Glastonbury YMCA'
+      return (this.selectedBranch && this.selectedBranch.name === 'Glastonbury YMCA')
           ? 'Glastonbury memberships are only valid at the Glastonbury location. A one-time joining fee of $25 (adult, senior, young adult) or $50 (couple or senior couple) will be added to your membership.'
           : 'As a member of the YMCA of Greater Hartford, you can use all of our facilities. Your "home" branch should be the one you intend to use most. A one-time joining fee of $25 (adult, senior, young adult) or $50 (couple, family or senior couple) will be added to your membership.';
     }
