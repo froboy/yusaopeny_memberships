@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/precache-manifest.37187372a48b765665e88873ee0a8e9e.js"
+  "/precache-manifest.2e42b9867c2e5db0dcfdae53258b2e87.js"
 );
 
 workbox.core.setCacheNameDetails({prefix: "openy_memberships"});
