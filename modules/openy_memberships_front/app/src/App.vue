@@ -31,8 +31,10 @@ export default {
       this.$router.replace({ name:  steps[0] })
     }
     // Check if user has selected Home Branch and set location.
-    if (this.$cookies.get('home_branch').id !== null) {
-      this.$store.commit('setLocation', this.$cookies.get('home_branch').id);
+    const homeBranchId = this.$cookies.get('home_branch').id;
+    if (homeBranchId !== null) {
+      this.$store.commit('setLocation', homeBranchId);
+      this.updateLocationBranch(homeBranchId);
       // Move to next step if we still on initial step.
       if (step == 0 && this.$cookies.get('home_branch').id !== null) {
         this.$store.commit('setStep', 1);
@@ -79,6 +81,27 @@ export default {
       if (steps[step] && this.$route.name != steps[step]) {
         this.$router.push({ name:  steps[step] })
       }
+    },
+    updateLocationBranch(branch) {
+      window.jQuery.ajax({
+        url: '/jsonapi/node/branch',
+        dataType: 'json'
+      }).then((data)=>{
+        this.isLoading = false
+        this.locations = Object.keys(data.data).map(key => {
+          let attributes = data.data[key].attributes;
+          return {
+            name: attributes.title,
+            address: attributes.field_location_address.address_line1 + '. ' + attributes.field_location_address.locality + ', ' + attributes.field_location_address.administrative_area,
+            value: attributes.drupal_internal__nid
+          }
+        });
+
+        this.item = this.locations.filter(item => item.value === Number(branch));
+        this.$store.commit('setLocationBranch', this.item[0]);
+      }).catch(() => {
+        this.isLoading = false
+      })
     }
   },
   watch: {
