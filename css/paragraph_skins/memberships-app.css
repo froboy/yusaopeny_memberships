@@ -1,5 +1,15 @@
 .membership-app {
   font-size: 12px;
+  /**
+    Support for SASS is deprecated as of v3.18.
+
+    The files remain here if your build is dependent on them
+    but they will not receive updates in future releases. All
+    SASS variables have been translated into CSS variables, so
+    migration should be quite simple if you'd like to move over.
+
+    In v4, these files will be removed.
+  */
   /* KeyFrames */
   /* Dropdown Default Transition */
   /** Component States */
@@ -575,6 +585,9 @@
   .membership-app .vs__dropdown-option--highlight {
     background: #0060af;
     color: #fff; }
+  .membership-app .vs__dropdown-option--deselect {
+    background: #fb5858;
+    color: #fff; }
   .membership-app .vs__dropdown-option--disabled {
     background: inherit;
     color: rgba(60, 60, 60, 0.5);
@@ -603,7 +616,8 @@
   .membership-app .vs--single .vs__selected {
     background-color: transparent;
     border-color: transparent; }
-  .membership-app .vs--single.vs--open .vs__selected {
+  .membership-app .vs--single.vs--open .vs__selected,
+  .membership-app .vs--single.vs--loading .vs__selected {
     position: absolute;
     opacity: .4; }
   .membership-app .vs--single.vs--searching .vs__selected {
@@ -635,7 +649,7 @@
     color: inherit; }
   .membership-app .vs--unsearchable .vs__search {
     opacity: 1; }
-  .membership-app .vs--unsearchable:not(.vs--disabled) .vs__search:hover {
+  .membership-app .vs--unsearchable:not(.vs--disabled) .vs__search {
     cursor: pointer; }
   .membership-app .vs--single.vs--searching:not(.vs--open):not(.vs--loading) .vs__search {
     opacity: .2; }

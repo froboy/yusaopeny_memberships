@@ -16,18 +16,19 @@
         </div>
       </div>
       <div>
-        <div class="title">Cost Summary</div>
         <div class="options">
           <div class="item">
-            <div class="price-title"><b>Dues</b></div>
-            <div class="price-value text-align-right"><b>${{ price | numFormat('0.00') }} / {{ duration }}</b></div>
+            <div class="price">
+              <div class="rate">{{ duration }}</div>
+              <div class="value">${{ price | numFormat('0.00') }}</div>
+            </div>
           </div>
         </div>
       </div>
     </div>
-    <a @click="selectProduct" class="select">
-      SELECT
-    </a>
+    <div class="select-option">
+      <a :class="($store.state.selectedPackageUrl === getUrl()) ? 'btn active' : 'btn'" @click="updateSelectedPackageUrl()">SELECT THIS MEMBERSHIP</a>
+    </div>
   </div>
 </template>
 <script>
@@ -57,24 +58,22 @@ export default {
       return price
     },
     duration() {
-      let duration = this.product.variations && this.product.variations[this.variant] && this.product.variations[this.variant].title === 'Annually' ? 'a' : 'mo'
-      return duration
+      if (this.product.variations && this.product.variations[this.variant] && this.product.variations[this.variant].duration) {
+        return this.product.variations[this.variant].duration
+      } else {
+        let duration = this.product.variations && this.product.variations[this.variant] && this.product.variations[this.variant].title === 'Annually' ? 'a' : 'Monthly';
+        return duration + ' rate';
+      }
     }
   },
   methods: {
-    updateValue() {
-      this.$emit('input', this.val)
+    getUrl() {
+      return this.product.variations && this.product.variations[this.variant] ? this.product.variations[this.variant].activenetUrl : '';
     },
-    selectProduct() {
-      this.$store.commit('setProduct', {
-        ...this.product,
-        variant: this.variant
+    updateSelectedPackageUrl() {
+      this.$store.commit('setSelectedPackageUrl', {
+        value: this.getUrl(),
       });
-      this.$store.commit('setItem', {
-        key: 'keepCart',
-        value: false,
-      });
-      this.$emit('go-next')
     }
   },
   components: {

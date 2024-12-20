@@ -88,15 +88,15 @@ class OpenyMemberships extends ControllerBase {
    * @param \Drupal\Component\Utility\EmailValidator $email_validator
    */
   public function __construct(
-      EntityTypeManagerInterface $entity_type_manager,
-      ConfigFactoryInterface $config_factory,
-      CartProviderInterface $cart_provider,
-      AccountProxyInterface $current_user,
-      RendererInterface $renderer,
-      MailManagerInterface $mail_manager,
-      OmPDFGenerator $pdf_generator,
-      EmailValidator $email_validator
-    ) {
+    EntityTypeManagerInterface $entity_type_manager,
+    ConfigFactoryInterface $config_factory,
+    CartProviderInterface $cart_provider,
+    AccountProxyInterface $current_user,
+    RendererInterface $renderer,
+    MailManagerInterface $mail_manager,
+    OmPDFGenerator $pdf_generator,
+    EmailValidator $email_validator
+  ) {
     $this->entityTypeManager = $entity_type_manager;
     $this->configFactory = $config_factory;
     $this->cartProvider = $cart_provider;
@@ -127,21 +127,27 @@ class OpenyMemberships extends ControllerBase {
   /**
    * Get Ages Groups and related products.
    */
-  public function getAgesGroupsInfo(Request $request) {
+  public function getAgesGroupsInfo(Request $request, $branch) {
+    if (!$branch) {
+      return new JsonResponse();
+    }
+
     $data = [];
     $tids = $this->entityTypeManager->getStorage('taxonomy_term')
       ->getQuery()
       ->condition('vid', 'memberships_ages_groups')
       ->condition('status', 1)
       ->accessCheck(TRUE)
-      ->sort('weight', 'ASC')
+      ->condition('field_branches', $branch)
       ->execute();
     $terms = Term::loadMultiple($tids);
+
     foreach ($terms as $tid => $term) {
       $data[$tid] = [
         'title' => $term->getName(),
         'uuid' => $term->uuid(),
         'id' => $tid,
+        'weight' => $term->getWeight(),
       ];
     }
     return new JsonResponse($data);
@@ -356,17 +362,24 @@ class OpenyMemberships extends ControllerBase {
             'uuid' => $product->uuid(),
             'id' => $product->id(),
             'title' => $product->label(),
-            'field_description' => $product->field_description->value,
+            'field_description' => strip_tags(
+              !$product->field_description->isEmpty() ?
+                $product->field_description->value : '',
+              '<strong>'),
             'branch' => $branch_array,
             'variations' => [],
           ];
-          foreach ($product->variations as $variant) {
+          foreach ($product->getVariations() as $variant) {
             $products[$product->uuid()]['variations'][] = [
-              'uuid' => $variant->entity->uuid(),
-              'id' => $variant->entity->id(),
-              'price' => $variant->entity->getPrice()->toArray()['number'],
-              'field_best_value' => $variant->entity->field_best_value->value,
-              'title' => $variant->entity->label(),
+              'uuid' => $variant->uuid(),
+              'id' => $variant->id(),
+              'price' => $variant->getPrice()->toArray()['number'],
+              'duration' => strip_tags(
+                !$variant->field_description->isEmpty() ?
+                  $variant->field_description->value : ''),
+              'field_best_value' => $variant->field_best_value->value,
+              'title' => $variant->label(),
+              'activenetUrl' => $variant->field_daxko_link->uri,
             ];
           }
         }

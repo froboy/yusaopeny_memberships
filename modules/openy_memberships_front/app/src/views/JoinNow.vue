@@ -35,7 +35,7 @@
     </div>
     <div class="navigation" v-if="valid">
       <div class="container">
-        <button class="btn btn-next" @click="submit">Next</button>
+        <button class="btn btn-next" @click="submit">NEXT STEP</button>
       </div>
     </div>
   </section>

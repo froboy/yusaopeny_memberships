@@ -8,8 +8,14 @@ export default {
   setLocation(state, location) {
     state.location = location
   },
+  setLocationBranch(state, location) {
+    state.locationBranch = location;
+  },
+  setSelectedPackageUrl(state, items) {
+    state.selectedPackageUrl = items.value;
+  },
   setFamily(state, family) {
-    state.family[family.key].count = family.value
+    state.family[family.key].count = family.value;
 
     let totalCount = 0;
     Object.keys(state.family).forEach(element => {
@@ -23,7 +29,8 @@ export default {
         count: 0
       }
     }
-    state.family[family.key].term_id = family.value
+    state.family[family.key].term_id = family.value;
+    state.family[family.key].title = family.title;
   },
   deleteFamilyKey(state, key) {
     this._vm.$delete(state.family, key);

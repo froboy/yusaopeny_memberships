@@ -116,7 +116,7 @@
       </div>
     <div class="navigation">
       <div class="container">
-        Discounts & Add-Ons: <b>{{discount_addons}} /mo.</b> <button class="btn btn-next" @click="$emit('go-next')">Next</button>
+        Discounts & Add-Ons: <b>{{discount_addons}} /mo.</b> <button class="btn btn-next" @click="$emit('go-next')">NEXT STEP</button>
       </div>
     </div>
   </section>

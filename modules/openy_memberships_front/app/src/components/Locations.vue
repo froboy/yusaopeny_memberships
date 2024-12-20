@@ -26,6 +26,8 @@ export default {
     updateLocation(e) {
       this.value = e;
       this.$store.commit('setLocation', this.value);
+      this.item = this.locations.filter(item => item.value === this.value);
+      this.$store.commit('setLocationBranch', this.item[0]);
     }
   },
   mounted() {
